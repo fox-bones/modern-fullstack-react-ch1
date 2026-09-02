@@ -12,7 +12,7 @@ export function EditPost({ post }) {
 	const [isEditing, setIsEditing] = useState(false)
 	const [title, setTitle] = useState(post.title)
 	const [author, setAuthor] = useState(post.author)
-	const [content, setContent] = useState(post.content)
+	const [content, setContent] = useState(post.contents)
 
 	const [tagList, setTagList] = useState(post.tags ?? [])
 	const [tag, setTag] = useState('')
@@ -96,16 +96,21 @@ export function EditPost({ post }) {
 			</div>
 			<div className="field">
 				<label htmlFor={`tag-${post._id}`}>Tags: </label>
+				<div className="field tag-row">
+					<input
+						id={`tag-${post._id}`}
+						value={tag}
+						onChange={(e) => setTag(e.target.value)}
+					/>
 
-				<input
-					id={`tag-${post._id}`}
-					value={tag}
-					onChange={(e) => setTag(e.target.value)}
-				/>
-
-				<button type="button" onClick={() => addTag(tag)}>
-					Add Tag
-				</button>
+					<button
+						type="button"
+						className="btn btn-ghost"
+						onClick={() => addTag(tag)}
+					>
+						Add Tag
+					</button>
+				</div>
 
 				<div>
 					{tagList.map((tag) => (
